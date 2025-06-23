@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Itens do Acervo</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+    function atualizarAcervo() {
+        fetch('/admin/api/acervo')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('acervo-tbody');
+                tbody.innerHTML = '';
+                data.itens.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${item.nome}</td>
+                        <td>${item.descricao || ''}</td>
+                        <td>${item.categoria || ''}</td>
+                        <td>
+                            <a href="/admin/acervo/editar/${item.id}" class="editar-link">Editar</a>
+                            <form action="/admin/acervo/excluir/${item.id}" method="post" style="display:inline;" class="excluir-form">
+                                <button type="submit" onclick="return confirm('Tem certeza?')">Excluir</button>
+                            </form>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                adicionarListenersExclusao();
+            });
+    }
+    function adicionarListenersExclusao() {
+        document.querySelectorAll('.excluir-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                fetch(form.action, { method: 'POST' })
+                    .then(() => atualizarAcervo());
+            });
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        atualizarAcervo();
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Gerenciar Acervo</h1>
+        <nav>
+            <a href="/admin/dashboard">Painel</a> |
+            <a href="/admin/acervo/novo">Novo Item</a> |
+            <a href="/admin/logout">Sair</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Itens do Acervo</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+            <tbody id="acervo-tbody">
+                <!-- Itens serão inseridos dinamicamente aqui -->
+            </tbody>
+        </table>
+        <a href="{{ url_for('admin_home') }}">Voltar</a>
+    </main>
+</body>
+</html>

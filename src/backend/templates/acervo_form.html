@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if item %}Editar{% else %}Novo{% endif %} Item do Acervo</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                fetch(window.location.pathname, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        window.parent.atualizarAcervo && window.parent.atualizarAcervo();
+                    }
+                });
+            });
+        }
+    });
+    </script>
+</head>
+<body>
+    <h1>{% if item %}Editar{% else %}Novo{% endif %} Item do Acervo</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label>Nome: <input type="text" name="nome" value="{{ item.nome if item else '' }}" required></label><br>
+        <label>Descrição: <textarea name="descricao">{{ item.descricao if item else '' }}</textarea></label><br>
+        <label>Categoria:
+            <select name="categoria_id">
+                <option value="">Selecione</option>
+                {% for cat in categorias %}
+                <option value="{{ cat.id }}" {% if item and item.categoria_id == cat.id %}selected{% endif %}>{{ cat.nome }}</option>
+                {% endfor %}
+            </select>
+        </label><br>
+        <label>Imagem: <input type="file" name="imagem" accept="image/*"></label><br>
+        {% if item and item.imagem %}
+        <p>Imagem atual: <img src="{{ url_for('uploaded_file', filename=item.imagem) }}" alt="{{ item.nome }}" style="max-width: 200px;"></p>
+        {% endif %}
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{{ url_for('listar_acervo') }}">Voltar</a>
+</body>
+</html>

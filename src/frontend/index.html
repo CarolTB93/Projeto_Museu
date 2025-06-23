@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Museu do Aeroclube do Paraná</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Museu do Aeroclube do Paraná</h1>
+        <nav>
+            <a href="#">Início</a> |
+            <a href="#acervo">Acervo</a> |
+            <a href="#tour">Tour Virtual</a> |
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+    <main>
+        <section id="acervo">
+            <h2>Acervo</h2>
+            <p>Veja os itens históricos do museu.</p>
+        </section>
+        <section id="tour">
+            <h2>Tour Virtual</h2>
+            <div id="threejs-demo"></div>
+        </section>
+        <section id="contato">
+            <h2>Contato</h2>
+            <form>
+                <input type="text" placeholder="Seu nome" required>
+                <input type="email" placeholder="Seu e-mail" required>
+                <textarea placeholder="Mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Museu do Aeroclube do Paraná</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+    <script src="script.js"></script>
+    <script src="threejs-example.js"></script>
+</body>
+</html>

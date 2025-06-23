@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Administrador - Museu</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Painel do Administrador</h1>
+        <nav>
+            <a href="/">Início</a> |
+            <a href="/admin">Administração</a> |
+            <a href="{{ url_for('listar_acervo') }}">Gerenciar Acervo</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Área Administrativa</h2>
+            <p>Bem-vindo ao painel de administração. Aqui você poderá gerenciar o acervo, usuários e conteúdos do site.</p>
+            <!-- Adicione formulários e funcionalidades de admin aqui -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Museu do Aeroclube do Paraná</p>
+    </footer>
+</body>
+</html>
