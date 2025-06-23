@@ -34,50 +34,47 @@ Este repositório segue a seguinte estrutura de diretórios e arquivos:
 └── .gitignore
 ```
 
-# Museu do Aeroclube do Paraná - Website Project
+# Museu do Aeroclube do Paraná - Projeto de Website
 
-**Version:** 1.0
-**Date:** October 26, 2023
+**Versão:** 1.0  
+**Data:** 26 de outubro de 2023
 
-## Overview
+## Visão Geral
 
-This project aims to create a dynamic website showcasing the history of the Aeroclube do Paraná. The website will feature an
-interactive virtual tour of the museum, a comprehensive catalog of the collection, and a user-friendly interface for
-administration and potential visitor engagement.  This is a collaborative, interdisciplinary project for the Centro Universitário
-Uniopet.
+Este projeto tem como objetivo criar um site dinâmico apresentando a história do Aeroclube do Paraná. O site contará com um tour virtual interativo pelo museu, um catálogo completo do acervo e uma interface amigável para administração e possível interação com visitantes. Este é um projeto colaborativo e interdisciplinar do Centro Universitário Uniopet.
 
-## Project Goals
+## Objetivos do Projeto
 
-*   Develop a visually appealing and informative website.
-*   Create an interactive virtual tour using Three.js.
-*   Build a database-driven system to manage the Aeroclube's collection.
-*   Provide an administrative interface for managing the site's content.
-*   Establish a foundation for future website enhancements and expansion.
+*   Desenvolver um site visualmente atrativo e informativo.
+*   Criar um tour virtual interativo usando Three.js.
+*   Construir um sistema baseado em banco de dados para gerenciar o acervo do Aeroclube.
+*   Fornecer uma interface administrativa para gerenciar o conteúdo do site.
+*   Estabelecer uma base para futuras melhorias e expansão do site.
 
-## Technologies Used
+## Tecnologias Utilizadas
 
-*   **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS & potentially jQuery), Bootstrap
+*   **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS & possivelmente jQuery), Bootstrap
 *   **Backend:** Python (Flask)
 *   **Database:** SQLite
-*   **Virtual Tour:** Three.js
-*   **Login:** Flask-Login (Simplified Example)
+*   **Tour Virtual:** Three.js
+*   **Login:** Flask-Login (Exemplo Simplificado)
 
-## Project Structure
+## Estrutura do Projeto
 
-The project is organized into the following folders:
+O projeto está organizado nas seguintes pastas:
 
-*   `src/`: Contains the source code for the frontend and backend.
-    *   `frontend/`: HTML, CSS, and JavaScript files for the website interface.
-    *   `backend/`:  Python (Flask) application files.
-*   `docs/`: Documentation, diagrams, and other project-related files.
-*   `assets/`: Images and other static assets.
-*   `requirements.txt`: Lists all the project's Python dependencies.
+*   `src/`: Contém o código-fonte do frontend e backend.
+    *   `frontend/`: Arquivos HTML, CSS e JavaScript da interface do site.
+    *   `backend/`: Arquivos da aplicação Python (Flask).
+*   `docs/`: Documentação, diagramas e outros arquivos do projeto.
+*   `assets/`: Imagens e outros arquivos estáticos.
+*   `requirements.txt`: Lista todas as dependências Python do projeto.
 
-## Setup and Running
+## Instalação e Execução
 
 ### 🚀 Método Mais Fácil (Windows)
 
-**Duplo clique no arquivo:**
+**Dê um duplo clique no arquivo:**
 ```
 start.bat
 ```
@@ -96,12 +93,12 @@ chmod +x start.sh
     python run.py --install
     ```
 
-2.  **Executar aplicação:**
+2.  **Executar a aplicação:**
     ```bash
     python run.py
     ```
 
-3.  **Reset do banco (se necessário):**
+3.  **Resetar o banco (se necessário):**
     ```bash
     python run.py --reset
     ```
@@ -113,7 +110,7 @@ chmod +x start.sh
     pip install -r requirements.txt
     ```
 
-2.  **Executar servidor Flask:**
+2.  **Executar o servidor Flask:**
     ```bash
     cd src/backend
     python app.py
@@ -121,7 +118,7 @@ chmod +x start.sh
 
 ### 🌐 Como Acessar
 
-**⚠️ IMPORTANTE**: Sempre acesse através do servidor Flask, **NUNCA** abra o arquivo HTML diretamente no navegador!
+**⚠️ IMPORTANTE**: Sempre acesse pelo servidor Flask, **NUNCA** abra o arquivo HTML diretamente no navegador!
 
 1. **Execute um dos métodos acima**
 2. **Aguarde** a mensagem: "Running on http://0.0.0.0:5000"
@@ -141,7 +138,7 @@ chmod +x start.sh
 - `/api/acervo` - API REST para listar itens do acervo
 - `/api/contato` - API REST para formulário de contato
 - `/admin/login` - Login do administrador
-- `/admin/dashboard` - Painel do administrador
+- `/admin/dashboard` - Painel administrativo
 - `/admin/acervo` - CRUD do acervo (listar, criar, editar, excluir)
 - `/admin/acervo/novo` - Formulário para novo item
 - `/admin/acervo/editar/<id>` - Formulário para editar item
@@ -163,13 +160,13 @@ Acesse: http://localhost:3000
 - ✅ Modelos de banco de dados para usuários, categorias e itens do acervo
 - ✅ CRUD completo para itens do acervo (criar, editar, listar, excluir)
 - ✅ Sistema de upload de imagens com validação de tipos
-- ✅ API REST para frontend consumir dados (/api/acervo, /api/contato)
-- ✅ Categorias pré-populadas automaticamente na primeira execução
+- ✅ API REST para o frontend consumir dados (/api/acervo, /api/contato)
+- ✅ Categorias pré-cadastradas automaticamente na primeira execução
 - ✅ **6 itens de exemplo criados automaticamente** 
-- ✅ Proteção de rotas administrativas com @login_required
-- ✅ Tratamento de erros e validações frontend/backend
+- ✅ Proteção das rotas administrativas com @login_required
+- ✅ Tratamento de erros e validações no frontend/backend
 - ✅ **Configuração CORS correta** para desenvolvimento
-- ✅ **Logs de debug** para facilitar desenvolvimento
+- ✅ **Logs de debug** para facilitar o desenvolvimento
 
 ### 🎨 Frontend
 - ✅ Interface moderna e responsiva com CSS Grid
@@ -178,9 +175,9 @@ Acesse: http://localhost:3000
 - ✅ Formulário de contato funcional com validação dupla
 - ✅ **Tour virtual 3D melhorado** com ambiente de museu realista
 - ✅ Design responsivo otimizado para mobile e desktop
-- ✅ **Galeria de acervo com grid responsivo** e hover effects
+- ✅ **Galeria do acervo com grid responsivo** e efeitos de hover
 - ✅ **Console logs detalhados** para debug
-- ✅ **Tratamento de erros visuais** para usuário final
+- ✅ **Tratamento de erros visuais** para o usuário final
 
 ### 🚀 Infraestrutura e DevOps
 - ✅ Requirements.txt completo com versões específicas
@@ -189,8 +186,8 @@ Acesse: http://localhost:3000
 - ✅ **Configuração correta de rotas estáticas** no Flask
 - ✅ Estrutura de uploads organizada com nomes únicos
 - ✅ **Documentação completa e atualizada**
-- ✅ **Reset automático de banco** para desenvolvimento
-- ✅ **Instruções claras de execução** para diferentes OS
+- ✅ **Reset automático do banco** para desenvolvimento
+- ✅ **Instruções claras de execução** para diferentes sistemas operacionais
 
 ## 🚀 Próximos Passos (Opcionais)
 
@@ -207,7 +204,7 @@ Acesse: http://localhost:3000
 - 🎮 Gamificação do tour virtual
 - 📈 Dashboard com estatísticas de visitação
 
-## 🐛 Troubleshooting
+## 🐛 Solução de Problemas
 
 ### Problema: "❌ Erro ao carregar acervo"
 **Solução**: Verifique se está acessando via servidor Flask (http://localhost:5000) e não abrindo o arquivo HTML diretamente.
@@ -225,7 +222,6 @@ Acesse: http://localhost:3000
 **Solução**: Verifique se a pasta `assets/images/acervo_imagens/` existe e tem permissões de escrita
 
 
-## Contributing
+## Contribuindo
 
-[Outline how others can contribute to the project - if applicable] (e.g., "If you have suggestions for improvements, or if you'd
-like to contribute code, please contact the team.")
+[Descreva como outras pessoas podem contribuir com o projeto - se aplicável] (ex: "Se você tem sugestões de melhorias ou quer contribuir com código, entre em contato com a equipe.")
