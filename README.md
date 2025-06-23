@@ -34,67 +34,64 @@ Este repositório segue a seguinte estrutura de diretórios e arquivos:
 └── .gitignore
 ```
 
-# Museu do Aeroclube do Paraná - Website Project
+# Museu do Aeroclube do Paraná - Projeto do Site
 
-**Version:** 1.0
-**Date:** October 26, 2023
+**Versão:** 1.0  
+**Data:** 26 de outubro de 2023
 
-## Overview
+## Visão Geral
 
-This project aims to create a dynamic website showcasing the history of the Aeroclube do Paraná. The website will feature an
-interactive virtual tour of the museum, a comprehensive catalog of the collection, and a user-friendly interface for
-administration and potential visitor engagement.  This is a collaborative, interdisciplinary project for the Centro Universitário
-Uniopet.
+Este projeto tem como objetivo criar um site dinâmico apresentando a história do Aeroclube do Paraná. O site contará com um tour virtual interativo pelo museu, um catálogo completo da coleção e uma área administrativa fácil de usar para gerenciamento e interação com visitantes. Este é um projeto colaborativo e interdisciplinar do Centro Universitário Uniopet.
 
-## Project Goals
+## Objetivos do Projeto
 
-*   Develop a visually appealing and informative website.
-*   Create an interactive virtual tour using Three.js.
-*   Build a database-driven system to manage the Aeroclube's collection.
-*   Provide an administrative interface for managing the site's content.
-*   Establish a foundation for future website enhancements and expansion.
+*   Desenvolver um site bonito e informativo.
+*   Criar um tour virtual interativo usando Three.js.
+*   Construir um sistema com banco de dados para gerenciar a coleção do Aeroclube.
+*   Fornecer uma área administrativa para gerenciar o conteúdo do site.
+*   Criar uma base para futuras melhorias e expansões do site.
 
-## Technologies Used
+## Tecnologias Utilizadas
 
-*   **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS & potentially jQuery), Bootstrap
+*   **Frontend:** HTML5, CSS3, JavaScript (JS puro & possivelmente jQuery), Bootstrap
 *   **Backend:** Python (Flask)
-*   **Database:** SQLite
-*   **Virtual Tour:** Three.js
-*   **Login:** Flask-Login (Simplified Example)
+*   **Banco de Dados:** SQLite
+*   **Tour Virtual:** Three.js
+*   **Login:** Flask-Login (Exemplo Simplificado)
 
-## Project Structure
+## Estrutura do Projeto
 
-The project is organized into the following folders:
+O projeto está organizado nas seguintes pastas:
 
-*   `src/`: Contains the source code for the frontend and backend.
-    *   `frontend/`: HTML, CSS, and JavaScript files for the website interface.
-    *   `backend/`:  Python (Flask) application files.
-*   `docs/`: Documentation, diagrams, and other project-related files.
-*   `assets/`: Images and other static assets.
-*   `requirements.txt`: Lists all the project's Python dependencies.
+*   `src/`: Código-fonte do site, dividido em frontend e backend.
+    *   `frontend/`: Arquivos HTML, CSS e JavaScript da interface do site.
+    *   `backend/`: Arquivos Python (Flask) do sistema.
+*   `docs/`: Documentação, diagramas e arquivos relacionados ao projeto.
+*   `assets/`: Imagens e outros arquivos estáticos.
+*   `requirements.txt`: Lista das dependências do Python usadas no projeto.
 
-## Setup and Running
+## Como Instalar e Rodar
 
 ### Método Rápido (Recomendado)
 
-1.  **Instalar dependências:**
+1.  **Instalar as dependências:**
     ```bash
     python run.py --install
     ```
 
-2.  **Executar a aplicação:**
+2.  **Rodar a aplicação:**
     ```bash
     python run.py
     ```
 
 ### Método Manual
 
-1.  **Install Dependencies:**
+1.  **Instalar as dependências:**
     ```bash
     pip install -r requirements.txt
     ```
 
-2.  **Run the Flask Application:**
+2.  **Rodar o sistema Flask:**
     ```bash
     cd src/backend
     python app.py
@@ -104,71 +101,71 @@ The project is organized into the following folders:
 
 - **Site público:** http://localhost:5000
 - **Painel administrativo:** http://localhost:5000/admin/login
-- **Credenciais padrão:** usuário `admin` / senha `admin`
+- **Usuário e senha padrão:** usuário `admin` / senha `admin`
 
-### Estrutura de URLs
+### Endereços principais do site
 
 - `/` - Página inicial do site
 - `/api/acervo` - API para listar itens do acervo
 - `/api/contato` - API para formulário de contato
 - `/admin/login` - Login do administrador
 - `/admin/dashboard` - Painel do administrador
-- `/admin/acervo` - Gestão do acervo
+- `/admin/acervo` - Gerenciamento do acervo
 - `/uploads/<filename>` - Imagens dos itens do acervo
 
-## ✅ O que já foi implementado
+## ✅ O que já está pronto
 
 ### Backend
 - ✅ Estrutura Flask completa com SQLAlchemy e Flask-Login
-- ✅ Sistema de autenticação de admin funcional (login/logout)
-- ✅ Modelos de banco de dados para usuários, categorias e itens do acervo
+- ✅ Sistema de login para administrador funcionando (login/logout)
+- ✅ Modelos do banco de dados para usuários, categorias e itens do acervo
 - ✅ CRUD completo para itens do acervo (criar, editar, listar, excluir)
-- ✅ Sistema de upload de imagens com validação
-- ✅ API REST para frontend consumir dados (/api/acervo, /api/contato)
-- ✅ Categorias pré-populadas automaticamente
-- ✅ Proteção de rotas administrativas
+- ✅ Upload de imagens com validação
+- ✅ API REST para o frontend acessar dados (/api/acervo, /api/contato)
+- ✅ Categorias cadastradas automaticamente
+- ✅ Proteção das páginas administrativas
 - ✅ Tratamento de erros e validações
 
 ### Frontend
 - ✅ Interface moderna e responsiva
-- ✅ Integração completa com backend via API
+- ✅ Integração total com o backend via API
 - ✅ Exibição dinâmica do acervo com imagens
-- ✅ Formulário de contato funcional com validação
-- ✅ Tour virtual 3D melhorado com Three.js
-- ✅ Design responsivo para mobile e desktop
-- ✅ Galeria de acervo com grid responsivo
+- ✅ Formulário de contato funcionando e com validação
+- ✅ Tour virtual 3D com Three.js
+- ✅ Layout adaptável para celular e computador
+- ✅ Galeria do acervo com visualização em grade
 
 ### Infraestrutura
-- ✅ Requirements.txt completo com todas as dependências
+- ✅ Arquivo requirements.txt completo com todas as dependências
 - ✅ Script de inicialização automatizado (run.py)
 - ✅ Configuração de arquivos estáticos
-- ✅ Estrutura de uploads organizada
+- ✅ Estrutura organizada para uploads
 - ✅ Documentação atualizada
 
 ## 🚀 Próximos Passos (Opcionais)
 
-- 📧 Implementar envio real de emails no formulário de contato
-- 🧪 Adicionar testes automatizados (backend e frontend)
-- 🔐 Sistema de múltiplos usuários admin
-- 📱 Progressive Web App (PWA)
-- 🌐 Deploy em produção (Heroku, Vercel, etc.)
-- 📊 Analytics e métricas de visitação
-- 🎨 Temas customizáveis
+- 📧 Implementar envio real de e-mails no formulário de contato
+- 🧪 Adicionar testes automáticos (backend e frontend)
+- 🔐 Sistema com múltiplos administradores
+- 📱 Tornar o site um aplicativo web progressivo (PWA)
+- 🌐 Publicar em produção (Heroku, Vercel, etc.)
+- 📊 Adicionar métricas de visitação
+- 🎨 Permitir troca de temas/cores do site
 - 🔍 Sistema de busca no acervo
 
-## Team Members
+## Integrantes
 
-*   [List Team Members Here - Add Names and Roles]
+*   [Liste os nomes e funções dos integrantes aqui]
 
-## Contact
+## Contato
 
-*   [Your Email Address / Contact Information]
+*   [Seu e-mail ou outra forma de contato]
 
-## License
+## Licença
 
-[Specify the License - e.g., MIT License] (A simple statement like "This project is licensed under the MIT License.")
+[Informe a licença do projeto - ex: MIT License] (Exemplo: "Este projeto está sob a licença MIT.")
 
-## Contributing
+## Como contribuir
 
-[Outline how others can contribute to the project - if applicable] (e.g., "If you have suggestions for improvements, or if you'd
-like to contribute code, please contact the team.")
+[Explique como outras pessoas podem contribuir para o projeto, se desejar] (Exemplo: "Se você tem sugestões de melhorias ou quer contribuir com código, entre em contato com a equipe.")
+
