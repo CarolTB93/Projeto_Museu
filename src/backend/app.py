@@ -10,14 +10,14 @@ from werkzeug.utils import secure_filename
 import os
 
 # Inicialização do app Flask
-app = Flask(__name__, static_folder='../frontend', static_url_path='/static')
+app = Flask(__name__, static_folder='../frontend', static_url_path='')
 app.config['SECRET_KEY'] = 'sua_chave_secreta_aqui'  # Troque por uma chave segura em produção
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///museu.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), '../../assets/images/acervo_imagens')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB máximo
 
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, origins=['http://localhost:5000', 'http://127.0.0.1:5000'])
 
 from models import db
 
@@ -35,25 +35,26 @@ def load_user(user_id):
     from models import User
     return User.query.get(int(user_id))
 
-@app.route('/')
-def index():
-    return send_from_directory('../frontend', 'index.html')
-
 @app.route('/api/acervo')
 def api_acervo():
-    from models import ItemAcervo, Categoria
-    itens = ItemAcervo.query.all()
-    itens_json = [
-        {
-            'id': item.id,
-            'nome': item.nome,
-            'descricao': item.descricao,
-            'categoria': item.categoria.nome if item.categoria else None,
-            'imagem': item.imagem if hasattr(item, 'imagem') else None
-        }
-        for item in itens
-    ]
-    return jsonify({'itens': itens_json})
+    try:
+        from models import ItemAcervo, Categoria
+        itens = ItemAcervo.query.all()
+        itens_json = [
+            {
+                'id': item.id,
+                'nome': item.nome,
+                'descricao': item.descricao or '',
+                'categoria': item.categoria.nome if item.categoria else 'Sem categoria',
+                'imagem': getattr(item, 'imagem', None)
+            }
+            for item in itens
+        ]
+        print(f'API /api/acervo retornando {len(itens_json)} itens')
+        return jsonify({'itens': itens_json})
+    except Exception as e:
+        print(f'Erro na API /api/acervo: {str(e)}')
+        return jsonify({'itens': [], 'error': str(e)}), 500
 
 @app.route('/api/contato', methods=['POST'])
 def api_contato():
@@ -192,7 +193,7 @@ def api_listar_acervo():
 
 if __name__ == '__main__':
     with app.app_context():
-        from models import User, Categoria
+        from models import User, Categoria, ItemAcervo
         db.create_all()
         
         # Criar usuário admin se não existir
@@ -212,4 +213,71 @@ if __name__ == '__main__':
         db.session.commit()
         print('Categorias padrão criadas')
         
+        # Criar itens de exemplo se não existirem
+        if ItemAcervo.query.count() == 0:
+            print('Criando itens de exemplo do acervo...')
+            
+            categoria_aeronaves = Categoria.query.filter_by(nome='Aeronaves').first()
+            categoria_instrumentos = Categoria.query.filter_by(nome='Instrumentos').first()
+            categoria_fotografias = Categoria.query.filter_by(nome='Fotografias').first()
+            
+            itens_exemplo = [
+                {
+                    'nome': 'Cessna 152',
+                    'descricao': 'Aeronave de treinamento básico, muito utilizada nas escolas de aviação do Brasil.',
+                    'categoria_id': categoria_aeronaves.id if categoria_aeronaves else None
+                },
+                {
+                    'nome': 'Piper Cherokee',
+                    'descricao': 'Aeronave monomotor de asa baixa, popular para treinamento avançado.',
+                    'categoria_id': categoria_aeronaves.id if categoria_aeronaves else None
+                },
+                {
+                    'nome': 'Altímetro Vintage',
+                    'descricao': 'Instrumento de medição de altitude da década de 1960.',
+                    'categoria_id': categoria_instrumentos.id if categoria_instrumentos else None
+                },
+                {
+                    'nome': 'Bússola Magnética',
+                    'descricao': 'Instrumento de navegação utilizado em aeronaves antigas.',
+                    'categoria_id': categoria_instrumentos.id if categoria_instrumentos else None
+                },
+                {
+                    'nome': 'Primeira Turma de Pilotos - 1955',
+                    'descricao': 'Fotografia histórica da primeira turma formada pelo Aeroclube do Paraná.',
+                    'categoria_id': categoria_fotografias.id if categoria_fotografias else None
+                },
+                {
+                    'nome': 'Hangar Principal - Anos 70',
+                    'descricao': 'Vista do hangar principal do aeroclube durante a década de 1970.',
+                    'categoria_id': categoria_fotografias.id if categoria_fotografias else None
+                }
+            ]
+            
+            for item_data in itens_exemplo:
+                item = ItemAcervo(**item_data)
+                db.session.add(item)
+            
+            db.session.commit()
+            print(f'✅ {len(itens_exemplo)} itens de exemplo criados no acervo!')
+        
+        print(f'📊 Status do banco: {ItemAcervo.query.count()} itens no acervo')
+
+# Rotas para servir frontend - DEVEM vir por último
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:filename>')
+def static_files(filename):
+    # Verifica se é um arquivo estático válido
+    if '.' in filename:
+        try:
+            return send_from_directory(app.static_folder, filename)
+        except:
+            pass
+    # Se não encontrar, retorna 404
+    return "Arquivo não encontrado", 404
+
+if __name__ == '__main__':        
     app.run(debug=True, use_reloader=True, host='0.0.0.0')

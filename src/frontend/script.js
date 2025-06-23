@@ -55,19 +55,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function carregarAcervo() {
+    console.log('🔄 Carregando acervo...');
+    
     fetch('/api/acervo')
-        .then(response => response.json())
+        .then(response => {
+            console.log('📡 Resposta da API:', response.status);
+            return response.json();
+        })
         .then(data => {
+            console.log('📋 Dados recebidos:', data);
+            
             const acervoSection = document.getElementById('acervo');
-            if (acervoSection && data.itens && data.itens.length > 0) {
+            if (!acervoSection) {
+                console.error('❌ Elemento #acervo não encontrado!');
+                return;
+            }
+            
+            if (data.itens && data.itens.length > 0) {
+                console.log(`✅ ${data.itens.length} itens encontrados`);
+                
                 let html = '<h2>Acervo</h2><div class="acervo-grid">';
                 data.itens.forEach(item => {
                     html += `
                         <div class="acervo-item">
-                            ${item.imagem ? `<img src="/uploads/${item.imagem}" alt="${item.nome}" class="acervo-imagem">` : ''}
+                            ${item.imagem ? `<img src="/uploads/${item.imagem}" alt="${item.nome}" class="acervo-imagem" onerror="this.style.display='none'">` : '<div class="acervo-placeholder">📷</div>'}
                             <div class="acervo-info">
                                 <h3>${item.nome}</h3>
-                                <p>${item.descricao || ''}</p>
+                                <p>${item.descricao || 'Sem descrição'}</p>
                                 ${item.categoria ? `<span class="categoria">${item.categoria}</span>` : ''}
                             </div>
                         </div>
@@ -75,12 +89,17 @@ function carregarAcervo() {
                 });
                 html += '</div>';
                 acervoSection.innerHTML = html;
+                console.log('✅ Acervo carregado com sucesso!');
             } else {
-                acervoSection.innerHTML = '<h2>Acervo</h2><p>Nenhum item encontrado no acervo.</p>';
+                console.log('⚠️ Nenhum item encontrado no acervo');
+                acervoSection.innerHTML = '<h2>Acervo</h2><p>Nenhum item encontrado no acervo. <br><small>Acesse o <a href="/admin/login">painel administrativo</a> para adicionar itens.</small></p>';
             }
         })
         .catch(error => {
-            console.error('Erro ao carregar acervo:', error);
-            document.getElementById('acervo').innerHTML = '<h2>Acervo</h2><p>Erro ao carregar acervo.</p>';
+            console.error('❌ Erro ao carregar acervo:', error);
+            const acervoSection = document.getElementById('acervo');
+            if (acervoSection) {
+                acervoSection.innerHTML = '<h2>Acervo</h2><p>❌ Erro ao carregar acervo. Verifique se o servidor está rodando.</p>';
+            }
         });
 }
