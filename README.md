@@ -224,17 +224,6 @@ Acesse: http://localhost:3000
 ### Problema: Imagens não carregam
 **Solução**: Verifique se a pasta `assets/images/acervo_imagens/` existe e tem permissões de escrita
 
-## Team Members
-
-*   [List Team Members Here - Add Names and Roles]
-
-## Contact
-
-*   [Your Email Address / Contact Information]
-
-## License
-
-[Specify the License - e.g., MIT License] (A simple statement like "This project is licensed under the MIT License.")
 
 ## Contributing
 
